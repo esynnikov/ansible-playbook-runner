@@ -25,14 +25,13 @@ SECRET_KEY = 'w&$-hw^#6n=my&-#bycr1g^j%@eu24vl$yto_xw^sg@dpjz(ga'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.129']
+ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'mainapp',
-    'vio',
     'projects',
     'tree',
     'inventory',
