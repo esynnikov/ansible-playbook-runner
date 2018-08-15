@@ -13,3 +13,8 @@ Run used to start selected Playbook set with selected inventory and contains res
 
 Limitation:
 Max depth of tree is 10 (to avoid loops)
+
+Run in container:
+1) Build image from Dockerfile
+2) Run Container with command:
+docker run -p 8000:8000 -v <folder for Project>:/opt/Projects -v <folder for database>/db.sqlite3:/opt/runner/ansible-playbook-runner/db.sqlite3 --name <ContainerName> <ContainerImage>
