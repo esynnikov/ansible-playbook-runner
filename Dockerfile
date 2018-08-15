@@ -11,6 +11,7 @@ RUN mkdir -p /opt/Projects
 RUN mkdir -p /opt/runner
 
 RUN cd /opt/runner && git clone https://github.com/esynnikov/ansible-playbook-runner
+RUN cd /opt/runner/ansible-playbook-runner && git checkout master
 
 RUN chmod -R 777 /opt/runner
 
