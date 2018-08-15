@@ -1,0 +1,30 @@
+{% extends "pages/wrapper3.html" %}
+{% block head %}
+    <title>Editor</title>
+{% endblock %}
+
+{% block bodytag %}
+<body>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <form id="Save" method="POST" action="">
+    <div class="row align-items-start h-75 w-100">
+        <input class="text no-border" name="Path" value="{{path}}" style="width: 100%;height: 5%;border-width: 0px; color: blue" readonly></input>
+        <textarea class="span6 w-100" name="DescriptionField" style="height: 95%">{{filebody}}</textarea>
+    </div>
+    <div class="row align-items-end align-self-end justify-content-end w-100">
+            <button class="btn btn-success btn-lg mr-lg-1 mr-xl-1" name="SaveFile">Save</button>
+            <button onclick="buttonclick()" class="btn btn-primary btn-lg" name="CancelFile">Cancel</button>
+        </form>
+    </div>
+    </form>
+</div>
+
+<script>
+    function buttonclick(){
+        window.close()
+    }
+</script>
+{% endblock %}

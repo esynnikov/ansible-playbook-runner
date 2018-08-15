@@ -1,0 +1,43 @@
+{% block tools %}
+<form id="toolsForm" action="" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+<span class="ml-auto">Upload playbook</span>
+    <div class="input-group ml-auto">
+        <div class="custom-file">
+            <input type="file" id="inputFile" name="InputFile" accept=".yaml,.yml"></input>
+            <label class="custom-file-label" for="inputFile" aria-describedby="inputGroupFileAddon02"></label>
+        </div>
+        <div class="input-group-append">
+            <button class="btn" name="FileButton" value="{{currentprojid}}">Upload</button>                
+        </div>
+    </div>
+    <script>
+            $('#inputFile').change(function() {
+              var i = $(this).next('label').clone();
+              var file = $('#inputFile')[0].files[0].name;
+              $(this).next('label').text(file);
+            });
+    </script>
+<span class="ml-auto mt-lg-2 mt-xl-2">Upload archive</span>
+    <div class="input-group mt-lg-1 mt-xl-1 ml-auto">
+            <div class="custom-file">
+                <input type="file" id="inputZip" name="InputZip" accept=".zip"></input>
+                <label class="custom-file-label" for="inputZip" aria-describedby="inputGroupFileAddon03"></label>
+            </div>
+            <div class="input-group-append">
+                    <button class="btn" name="ZipButton" value="{{currentprojid}}">Upload</button>                
+            </div>
+    </div>
+    <script>
+            $('#inputZip').change(function() {
+              var i = $(this).next('label').clone();
+              var file = $('#inputZip')[0].files[0].name;
+              $(this).next('label').text(file);
+            });
+    </script>
+{% if currentprojid != 0%}
+    <button class="btn btn-lg btn-primary mt-lg-1 mt-xl-1 ml-auto" name="ReCreate" value="{{currentprojid}}">Create Tree</button>
+    <button class="btn btn-lg btn-danger mt-lg-1 mt-xl-1 ml-auto" name="Clear" value="{{currentprojid}}">Clear</button>
+{% endif %}
+</form>
+{% endblock %}

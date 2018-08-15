@@ -1,0 +1,20 @@
+{% block bsdd %}
+
+<div class="row bg-secondary ml-auto mr-auto">
+        <div class="input-group">
+            <input type="text" class="form-control w-75" data-toggle="Bs text" value="{{currentbs.name}}" placeholder="Playbook set" name="bstext_{{currentbs.id}}"></input>
+            <div class="input-group-append w-25">
+               <div class="dropdown w-100"> 
+                <button class="btn btn-info btn-lg dropdown-toggle btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Playbook set</button>
+                <div class="dropdown-menu">
+                    {% for item in bslist %}
+                        <button class="dropdown-item" value={{item.id}} name="bs">{{item.name}}</button>
+                    {% endfor %}
+                </div>
+               </div> 
+            </div>
+    
+        </div>    
+    </div>
+    
+{% endblock %}

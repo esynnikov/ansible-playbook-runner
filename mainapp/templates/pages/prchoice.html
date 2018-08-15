@@ -1,0 +1,14 @@
+{% block projdd %}
+
+<div class="row bg-secondary ml-auto mr-auto">
+        <div class="dropdown w-25">
+                    <button class="btn btn-primary btn-lg dropdown-toggle w-100 text-truncate" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{currentproj}}</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        {% for item in projlist %}
+                            <button class="dropdown-item" value="{{item.id}}" name="project">{{item.name}}</button>
+                        {% endfor %}
+                    </div>
+                </div>
+</div>
+
+{% endblock %}

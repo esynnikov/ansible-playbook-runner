@@ -1,0 +1,37 @@
+{% extends "pages/projects/projects_main.html" %}
+{% block tools %}
+<form id="projform" method="POST" action="">
+        {% csrf_token %}
+        <p>Project Id</p>
+        <input type="text" class="form-control ml-auto" placeholder="Id" style="width: 100%" value="{{projid}}" name="IdField" readonly></input>
+        <p></p>
+        <p>Project Name</p>
+    
+    
+        <input type="text" class="form-control ml-auto" placeholder="Name" style="width: 100%" value="{{projname}}" name="NameField" {{elementactivity}}></input>
+        <p></p>
+        <p>Description</p>
+        <textarea class="span6 h-50 w-100"  name="DescriptionField" value="{{description}}" {{elementactivity}}>{{description}}</textarea>
+
+    
+    <div class="row justify-content-end h-10">
+            {% if projid != 0 %} 
+                <button class="btn btn-danger btn-lg mr-lg-1 mr-xl-1 mt-xl-1 mt-lg-1" name="Delete">Delete</button>
+            {% endif %}     
+            <button onclick="return saveClick(this);" class="btn btn-success btn-lg mr-lg-3 mr-xl-3 mt-xl-1 mt-lg-1" name="Save">Save</button>
+            
+            <script>
+                function saveClick(bt){
+                   var nm = document.getElementsByName("NameField")[0];
+                       if (nm.value == '') {
+                           nm.style.borderColor="red";
+                           return false;
+                       }
+               }
+               </script>            
+
+            
+    
+    </div>
+    </form>
+{% endblock %}

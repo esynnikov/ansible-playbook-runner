@@ -1,0 +1,131 @@
+{% extends "pages/buildset/bs_init.html" %}
+{% block tools %}
+
+<form id="CheckboxForm" method="POST" action="">
+ <span>
+<div class="row w-100">  
+  <div class="col w-100 border">
+  
+    {% for item in lsttree %}
+    <div class="row align-items-center">    
+        <div class="col col-1 col-xl-1 col-lg-1">
+            <input onchange='handleClick(this,"tree{{item.id}}_",{{item.level}});' type="checkbox" value="{{item.id}}" name="tree{{item.parent}}_{{item.level}}"></input>
+        </div>
+        <div class="col col-11 col-xl-11 col-lg-11">
+               <span class="align-middle" style="margin-left: {{item.level}}%">{{item.path}}</span>
+        </div>
+    
+    </div>
+    {% endfor %}
+   
+    </div>
+</div>
+  
+{% if currentbs.id > 0 %}
+    <div class="row w-100 justify-content-end">
+        <button class="btn btn-secondary mt-xl-1 mt-lg-1" name="AddItems" value="{{currentbs.id}}">Add</button>
+    </div>
+{% else %}
+    <div class="row w-100 justify-content-end">
+        <button class="btn btn-secondary mt-xl-1 mt-lg-1" name="AddItemsNew" value="{{currentprojid}}">Add</button>
+    </div>
+{% endif %}
+</span>
+
+
+
+<span>
+  <div class="row w-100 mt-lg-1 mt-xl-1">  
+    <input class="w-100" type="text" placeholder="Name" name="NameField" value={{currentbs.name}}></input>
+    <textarea class="span6 w-100 mt-lg-1 mt-xl-1" placeholder="Description" name='Description' value="{{currentbs.description}}">{{currentbs.description}}</textarea>
+ </div>
+
+ <span class="row w-100 mt-lg-1 mt-xl-1 justify-content-end bg-light">
+<!--div class="row w-100 mt-lg-1 mt-xl-1 justify-content-end"-->
+    <!--div class="col col-xl-12 col-lg-12 w-100 nopadding"-->
+ {% for item in lstplays %}
+
+    <div class="row w-100">
+        <div class="input-group mr-xl-3 mr-lg-3"> 
+            
+            <input class="form-control" type="text" name="playbook" value="{{item.path}}" readonly></input>
+            <div class="input-group-append">
+                <button onclick="btnclick(this,-1); return false;" class="btn btn-sm btn-secondary" name="up" value="{{item.id}}">up</button>
+                <button onclick="btnclick(this,1); return false;" class="btn btn-sm btn-secondary" name="down" value="{{item.id}}">down</button>
+                <button onclick="delclick(this)" class="btn btn-sm btn-secondary" name="del" value="{{item.id}}">del</button>
+            </div>
+        </div>
+    </div>
+
+ 
+ {% endfor %}
+<!--/div-->
+</span>
+{% if currentbs.id > 0 %}
+    <div class="row w-100 mt-xl-1 mt-lg-1 justify-content-end">
+        <button class="btn btn-danger mr-lg-1 mr-xl-1" name="Delete" value="{{currentbs.id}}">Delete</button>
+        <button onclick="return saveClick(this);" class="btn btn-primary" name="Save" value="{{currentbs.id}}">Save</button>
+        
+    </div>
+{% else %}
+    <div class="row w-100 mt-xl-1 mt-lg-1 justify-content-end">
+        <button onclick="return saveClick(this);" class="btn btn-primary" name="SaveNew" value="{{currentprojid}}">Save</button>
+    </div>
+{% endif %}
+</span>
+
+<script>
+    function btnclick(bt,direction) {
+		var span = bt.parentNode.parentNode.parentNode,
+        td = span.parentNode;
+
+    if (direction === -1 && span.previousElementSibling) {
+        td.insertBefore(span, span.previousElementSibling);
+    } else if (direction === 1 && span.nextElementSibling) {
+        td.insertBefore(span, span.nextElementSibling.nextElementSibling)
+    }
+}
+
+function delclick(bt){
+	var row = bt.parentNode.parentNode.parentNode;
+	row.parentNode.removeChild(row);
+	return false;
+}        
+
+function saveClick(bt){
+    var nm = document.getElementsByName("NameField")[0];
+        if (nm.value == '') {
+            nm.style.borderColor="red";
+            return false;
+        }
+}
+</script>
+
+</form>
+
+<script>
+    function handleClick(cb,name,level) {
+          var event = new Event("HTMLEvents");
+          var nextlevel = level+1;
+         
+          event.initEvent("change",false,true);
+          
+            if (cb.checked == 1){
+              for (var i=0;i<document.getElementsByName(name+nextlevel).length;i++){
+                ncb = document.getElementsByName(name+nextlevel)[i];
+                ncb.checked = 1
+                ncb.disabled = 1
+                ncb.dispatchEvent(event);
+              }
+           
+      }
+        else {
+              for (var i=0;i<document.getElementsByName(name+nextlevel).length;i++){
+                ncb = document.getElementsByName(name+nextlevel)[i];
+                ncb.disabled = 0
+                ncb.dispatchEvent(event);
+            }
+      }
+      }
+</script>
+{% endblock %}

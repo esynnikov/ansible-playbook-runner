@@ -1,0 +1,56 @@
+{% extends "pages/inventory/inv_main.html" %}
+{% block tools %}
+<form id="EditFileForm" method="POST" action="" target="_blank">
+    
+    <div class="input-group">
+        <input type="text" class="form-control" id="inputFile" name="InputFile" value="{{inv.filename}}" readonly></input>
+        <div class="input-group-append">
+            <button class="btn btn-secondary" name="Edit" value="{{inv.id}}">Edit</button>
+        </div>
+               
+    </div>
+</form>
+<form id="ButtonForm" method="POST" action="" enctype="multipart/form-data">
+<input type="text" class="form-control mt-lg-1 mt-xl-1" placeholder="InventoryName" name="NameField" value="{{inv.name}}" readonly></input>    
+<span class="ml-auto">Upload group_vars</span>
+    <div class="input-group ml-auto">
+        <div class="custom-file">
+            <input type="file" id="GroupFile" name="GroupFile" accept=".yaml,.yml"></input>
+            <label class="custom-file-label" for="GroupFile" aria-describedby="inputGroupFileAddon02"></label>
+        </div>
+        <div class="input-group-append">
+            <button class="btn" name="GroupButton" value="{{inv.id}}">Upload</button>                
+        </div>
+    </div>
+    <script>
+            $('#GroupFile').change(function() {
+              var i = $(this).next('label').clone();
+              var file = $('#GroupFile')[0].files[0].name;
+              $(this).next('label').text(file);
+            });
+    </script>
+<span class="ml-auto">Upload host_vars</span>
+<div class="input-group ml-auto">
+    <div class="custom-file">
+        <input type="file" id="HostFile" name="HostFile" accept=".yaml,.yml"></input>
+        <label class="custom-file-label" for="HostFile" aria-describedby="inputGroupFileAddon03"></label>
+    </div>
+    <div class="input-group-append">
+        <button class="btn" name="HostButton" value="{{inv.id}}">Upload</button>                
+    </div>
+</div>
+<script>
+        $('#HostFile').change(function() {
+          var i = $(this).next('label').clone();
+          var file = $('#HostFile')[0].files[0].name;
+          $(this).next('label').text(file);
+        });
+</script>
+<textarea class="span6 w-100 h-50 mt-lg-2 mt-xl-2" placeholder="Description" name="Description" value="{{inv.description}}">{{inv.description}}</textarea>
+<div class="row justify-content-end h-10">
+    <button class="btn btn-danger mt-lg-2 mt-xl-2 mr-lg-1 mr-xl-1" name="Delete" value="{{inv.id}}">Delete</button>
+    <button class="btn btn-success mt-lg-2 mt-xl-2 mr-lg-3 mr-xl-3" name="Save" value="{{inv.id}}">Save</button>
+
+</div>
+</form>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "pages/wrapper3.html" %}
+{% block head %}
+    <title>Projects</title>
+{% endblock %}
+
+{% block bodytag %}
+<body>
+{% endblock %}
+
+{% block projectactive %} active {% endblock %}
+
+
+{% block body %}
+<div class="row mt-lg-1 mt-xl-1 ml-auto mr-auto">
+{% if projlist.count == 0%}
+    {% include "pages/projects/noprojalert.html" %}
+    <form id="addform" method="POST" action="">
+            <button class="btn btn-lg btn-primary mr-xl-8 mr-lg-8" name="Add">Add New Project</button>
+        </form>
+    <div class="col col-12 col-lg-12 col-xl-12 bd-content ml-auto">
+
+{% else %}
+<div class="col col-3 col-lg-3 col-xl-3 bd-sidebar text-truncate">
+        <form id="projform" method="POST" action="">
+        {% csrf_token %}
+        <div class="row">
+                <div class="col col-lg-10 col-xl-10">
+                    <div class="list-group">
+                        {% for item in projlist %}
+                            <button class="list-group-item list-group-item-action text-truncate" id="{{item.id}}" name="proj" value="{{item.id}}">{{item.name}}</button>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col col-lg-1 col-xl-1">
+                        <div class="row">
+                            <button class="btn btn-md btn-primary" name="Add">+</button>
+                        </div>
+                </div>
+        </div>
+    </form>
+</div>
+   
+        <div class="col col-9 col-lg-9 col-xl-9 bd-content">
+      
+
+{% endif %}
+
+{% block tools %}
+{% endblock %}
+</div>
+</div>
+
+{% endblock %}

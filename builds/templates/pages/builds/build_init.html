@@ -1,0 +1,74 @@
+{% extends "pages/wrapper3.html" %}
+{% block head %}
+    <title>Build Set</title>
+{% endblock %}
+
+{% block bodytag %}
+<body>
+{% endblock %}
+
+{% block buildactive %} active {% endblock %}
+
+
+{% block body %}
+<form id="prchoice" method="POST" action="">
+{% include "pages/prchoice.html" %}
+</form>
+{% if currentprojid != 0 %}
+
+<div class="row ml-auto mr-auto">
+    {% if buildlist.count != 0 %}
+        
+    <div class="col col-3 col-lg-3 col-xl-3 bd-sidebar text-truncate">
+            <form id="projform" method="POST" action="">
+                    {% csrf_token %}
+            <div class="row">
+                    <div class="list-group w-100 ml-auto mr-auto">
+                        {% for item in buildlist %}
+                            {% if item.status == 'Failed' %}
+                                <button class="list-group-item list-group-item-action text-truncate text-danger" id="{{item.id}}" name="build" value="{{item.id}}">{{item.name}}</button>
+                            {% elif item.status == 'Running' %}    
+                                <button class="list-group-item list-group-item-action text-truncate text-warning" id="{{item.id}}" name="build" value="{{item.id}}">{{item.name}}</button>
+                            {% elif item.status == 'Stopped' %}    
+                                <button class="list-group-item list-group-item-action text-truncate text-secondary" id="{{item.id}}" name="build" value="{{item.id}}">{{item.name}}</button>
+                            
+                            {% else %}
+                                <button class="list-group-item list-group-item-action text-truncate text-success" id="{{item.id}}" name="build" value="{{item.id}}">{{item.name}}</button>
+                            {% endif %}
+                        {% endfor %}
+                    </div>                    
+            </div>
+            </form>
+    </div>
+    <div class="col col-9 col-lg-9 col-xl-9 bd-content">
+    {% else %}
+    <div class="col col-12 col-lg-12 col-xl-12 bd-content">
+    {% endif %}
+
+
+
+
+
+<form id="InvBschoice" method="POST" action="">
+<div class="span2">
+{% include "pages/invchoice.html" %}
+{% include "pages/bschoice.html" %}
+<div class="row bg-secondary ml-auto mr-auto">
+    <input type="text" class="form-control " name="secret" placeholder="Vault Pass" value=""></input>
+</div>
+
+
+{% if currentbs != '' and currentinv != ''  %}
+<div class="row justify-content-end ml-auto mt-lg-1 mt-xl-1 mr-auto">
+    <button onclick="setTimeout(getlog,5000)" class="btn btn-danger" name="Run" value="{{currentprojid}}">Start</button>
+</div>
+{% endif %}
+</div>
+
+
+</form>
+</div>
+{% endif %}
+
+
+{% endblock %}

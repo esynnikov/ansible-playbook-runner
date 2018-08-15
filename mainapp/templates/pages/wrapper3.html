@@ -1,0 +1,44 @@
+<head>
+ {% block header %}
+ {% endblock %}
+ {% load staticfiles %}
+ <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+</head>
+{% load staticfiles %}
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+{% load staticfiles %}
+<script src="{% static 'js/popper.min.js' %}"></script>
+{% load staticfiles %}
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+{% block bodytag %}
+{% endblock %}
+    <header class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="navbar-nav-scroll">
+            <ul class="navbar-nav flex-row">
+                    <li class="nav-item">
+                        <li class="nav-item">
+                            <a class="nav-link {% block homeactive %}{% endblock %}" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% block projectactive %}{% endblock %}" href="/projects">Projects</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link {% block treeactive %}{% endblock %}" href="/tree">Playbook tree</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link {% block invactive %}{% endblock %}" href="/inventory">Inventory</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link {% block bsactive %}{% endblock %}" href="/buildset">Playbook Set</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link {% block buildactive %}{% endblock %}" href="/build">Run</a>
+                        </li>
+            </ul>
+        </div>
+    </header>
+{% block body %}
+{% endblock %}
+</body>
+
+</html>

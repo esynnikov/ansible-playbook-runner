@@ -1,0 +1,22 @@
+{% block invdd %}
+
+<div class="row bg-secondary mr-auto ml-auto">
+    <div class="input-group">
+        <input type="text" class="form-control w-75" data-toggle="inventory text" value="{{currentinv.name}}" placeholder="Inventory" name="invtext_{{currentinv.id}}"></input>
+        <div class="input-group-append w-25">
+           <div class="dropdown w-100"> 
+            <button class="btn btn-info btn-lg dropdown-toggle btn-block w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Inventory</button>
+            <div class="dropdown-menu">
+                {% for item in invlist %}
+                    <button class="dropdown-item" value={{item.id}} name="inventory">{{item.name}}</button>
+                {% endfor %}
+            </div>
+           </div> 
+        </div>
+
+    </div>    
+</div>
+
+
+
+{% endblock %}

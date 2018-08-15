@@ -1,0 +1,37 @@
+{% extends "pages/wrapper3.html" %}
+{% block head %}
+    <title>Editor</title>
+{% endblock %}
+{% block navbar %}
+<li class="nav-item">
+    <a class="nav-link {{homeactivity}}" href="/">Home</a>
+<li class="nav-item">
+    <a class="nav-link " href="/vio">VIO</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/list">List</a>
+</li>    
+<li class="nav-item">
+    <a class="nav-link" href="/projects">Projects</a>
+</li>
+<li class="nav-item">
+        <a class="nav-link" href="/tree">Tree</a>
+</li>
+{% endblock %}
+
+{% block body %}
+<div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Well done!</h4>
+        <p>The file successfully saved</p>
+        <hr>
+        <p class="mb-0">
+            <button onclick="buttonclick()" class="btn btn-lg btn-success" name="OK">ОК</button>
+        </p>
+</div>
+
+<script>
+        function buttonclick(){
+            window.close()
+        }
+</script>
+{% endblock %}

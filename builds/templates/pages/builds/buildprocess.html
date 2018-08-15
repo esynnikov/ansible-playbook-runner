@@ -1,0 +1,66 @@
+{% extends "pages/wrapper3.html" %}
+{% block head %}
+    <title>Projects</title>
+{% endblock %}
+
+{% block bodytag %}
+{% if status != 'Failed' and status != 'Complete' and status != 'Stopped' %}
+<body onload="setTimeout(function(){            
+    window.location = '/build/process?process={{processid}}';
+},3000)">
+{% else %}
+<body>
+{% endif %}
+{% endblock %}
+
+{% block buildactive %} active {% endblock %}
+
+{% block body %}
+<div class="row ml-auto mr-auto">
+    {% if status == 'Failed' %}
+    <p class="text-danger ml-xl-3 ml-lg-3">{{status}}</p>
+    {% elif status == 'Running' %}
+    <p class="text-warning ml-xl-3 ml-lg-3">{{status}}</p>
+    {% elif status == 'Stopped' %}
+    <p class="text-secondary ml-xl-3 ml-lg-3">{{status}}</p>
+    {% else %}
+    <p class="text-success ml-xl-3 ml-lg-3">{{status}}</p>
+    {% endif %}
+</div>
+
+{% for item in bitemlist %}
+<div class="row w-100 ml-auto mr-auto">
+        {% if item.status == 'Failed' %}
+        <p>{{item.path}}</p>    <p class="text-danger ml-xl-3 ml-lg-3">{{item.status}}</p>
+        {% elif item.status == 'Running' %}
+        <p>{{item.path}}</p>    <p class="text-warning ml-xl-3 ml-lg-3">{{item.status}}</p>
+        {% elif item.status == 'Stopped' %}
+        <p>{{item.path}}</p>    <p class="text-secondary ml-xl-3 ml-lg-3">{{item.status}}</p>
+        {% else %}
+        <p>{{item.path}}</p>    <p class="text-success ml-xl-3 ml-lg-3">{{item.status}}</p>
+        {% endif %}
+</div>
+{% endfor%}
+
+<div class="row w-100 ml-auto mr-auto">
+    <textarea class="span6 h-75 w-100" id="textarea" name="{{processid}}">{{log}}</textarea>
+</div>
+
+<script>
+    var textarea = document.getElementById('textarea');
+    textarea.scrollTop = textarea.scrollHeight;
+</script>
+
+<form id="buttons" method="GET" action="/build/process?process={{processid}}">
+    <div class="row justify-content-end mr-auto ml-auto mt-xl-1 mt-lg-1">
+        {% if status == 'Failed' or status == 'Complete' or status == 'Stopped' %}
+        <button class="btn btn-danger" name="Delete" value="{{processid}}">Delete</button>
+        {% else %}
+        <!--button class="btn btn-warning" name="Stop" value="{{processid}}" >Stop</button-->
+        {% endif %}
+    </div>
+</form>
+
+{% endblock %}
+
+

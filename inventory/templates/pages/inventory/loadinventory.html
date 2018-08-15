@@ -1,0 +1,36 @@
+{% extends "pages/inventory/inv_main.html" %}
+{% block tools %}
+<form id="Load Form" method="POST" action="" enctype="multipart/form-data">
+    
+    <div class="input-group">
+                <div class="custom-file">
+                    <input type="file" id="inputFile" name="InputFile"></input>
+                    <label class="custom-file-label" for="inputFile" aria-describedby="inputGroupFileAddon02"></label>
+                </div>
+               
+        </div>
+
+<script>
+                $('#inputFile').change(function() {
+                  var i = $(this).next('label').clone();
+                  var file = $('#inputFile')[0].files[0].name;
+                  $(this).next('label').text(file);
+                });
+</script>
+<input type="text" class="form-control mt-lg-1 mt-xl-1" placeholder="InventoryName" name="NameField" value="{{name}}"></input>
+<textarea class="span6 w-100 h-50 mt-lg-2 mt-xl-2" placeholder="Description" name="Description" value="{{description}}">{{description}}</textarea>
+<div class="row justify-content-end h-10">
+
+    <button onclick="return uploadClick(this);" class="btn btn-primary mt-lg-2 mt-xl-2 mr-lg-3 mr-xl-3" name="Upload" value="{{currentprojid}}">Upload</button>
+</div>
+<script>
+ function uploadClick(bt){
+    var nm = document.getElementsByName("NameField")[0];
+        if (nm.value == '') {
+            nm.style.borderColor="red";
+            return false;
+        }
+}
+</script>
+</form>
+{% endblock %}
